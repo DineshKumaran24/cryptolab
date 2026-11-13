@@ -245,19 +245,19 @@ Open your browser at `http://localhost:8080`.
 
 3. **Push Local Code:**
    ```bash
-   git remote add origin https://github.com/<your-username>/cryptolab.git
+   git remote add origin https://github.com/DineshKumaran24/cryptolab.git
    git branch -M main
    git push -u origin main
    ```
 
 4. **Enable GitHub Pages:**
-   - Open your repository on GitHub.
+   - Open your repository on GitHub: `https://github.com/DineshKumaran24/cryptolab`
    - Click **Settings** &rarr; **Pages** (under Code and automation).
    - Under **Build and deployment** &rarr; **Source**, select **Deploy from a branch**.
    - Under **Branch**, select `main` and folder `/ (root)`.
    - Click **Save**.
-   - GitHub Pages will publish the site in 1-2 minutes at:
-     `https://<your-username>.github.io/cryptolab/`
+   - GitHub Pages will publish the site at:
+     `https://dineshkumaran24.github.io/cryptolab/`
 
 All asset links and script paths in CryptoLab use relative URLs (`css/style.css`, `js/app.js`), ensuring seamless operation in repository subdirectories without configuration changes.
 
