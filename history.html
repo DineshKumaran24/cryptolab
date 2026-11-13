@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Operation History – CryptoLab</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .history-toolbar {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .search-box-wrapper {
+      position: relative;
+      min-width: 240px;
+    }
+
+    .search-input {
+      padding-left: 2.25rem;
+    }
+
+    .search-icon-pos {
+      position: absolute;
+      left: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-light);
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <div class="brand-icon-wrapper">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        </div>
+        <span>CryptoLab</span>
+        <span class="brand-badge">Toolkit</span>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+          <li class="nav-item"><a href="classical.html" class="nav-link">Classical Ciphers</a></li>
+          <li class="nav-item"><a href="modern.html" class="nav-link">Modern Cryptography</a></li>
+          <li class="nav-item"><a href="learning.html" class="nav-link">Learning Center</a></li>
+          <li class="nav-item"><a href="history.html" class="nav-link active">History</a></li>
+          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="btn btn-primary btn-sm" id="history-export-csv-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          <span>Export CSV</span>
+        </button>
+        <button class="nav-mobile-toggle" aria-label="Toggle Navigation">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Offcanvas Drawer -->
+  <div class="mobile-drawer-overlay"></div>
+  <aside class="mobile-drawer">
+    <div class="mobile-drawer-header">
+      <div class="nav-brand">
+        <div class="brand-icon-wrapper">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        </div>
+        <span>CryptoLab</span>
+      </div>
+      <button class="mobile-drawer-close btn btn-outline btn-icon-only" aria-label="Close menu">&times;</button>
+    </div>
+    <ul class="mobile-drawer-links">
+      <li><a href="index.html" class="mobile-drawer-link">Home</a></li>
+      <li><a href="dashboard.html" class="mobile-drawer-link">Dashboard</a></li>
+      <li><a href="classical.html" class="mobile-drawer-link">Classical Ciphers</a></li>
+      <li><a href="modern.html" class="mobile-drawer-link">Modern Cryptography</a></li>
+      <li><a href="learning.html" class="mobile-drawer-link">Learning Center</a></li>
+      <li><a href="history.html" class="mobile-drawer-link active">Operation History</a></li>
+      <li><a href="about.html" class="mobile-drawer-link">About & Specifications</a></li>
+    </ul>
+  </aside>
+
+  <!-- App Layout -->
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <span class="sidebar-title">Toolkit Tools</span>
+        <ul class="sidebar-menu">
+          <li>
+            <a href="classical.html" class="sidebar-link">
+              <div class="sidebar-link-content">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                <span>Classical Ciphers</span>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="modern.html" class="sidebar-link">
+              <div class="sidebar-link-content">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                <span>Modern Cryptography</span>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="learning.html" class="sidebar-link">
+              <div class="sidebar-link-content">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                <span>Learning Center</span>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="about.html" class="sidebar-link">
+              <div class="sidebar-link-content">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                <span>About & Specs</span>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="breadcrumb-bar">
+        <ul class="breadcrumb-list">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item">/</li>
+          <li class="breadcrumb-item"><a href="dashboard.html">Dashboard</a></li>
+          <li class="breadcrumb-item">/</li>
+          <li class="breadcrumb-item active">Operation History</li>
+        </ul>
+        <span class="badge badge-success" id="history-count-badge">0 records</span>
+      </div>
+
+      <div class="page-header">
+        <div>
+          <h1>Cryptographic Operation History</h1>
+          <p class="lead" style="margin-bottom: 0;">
+            Inspect previously performed transformations, filter by algorithm and operation type, or export records to CSV.
+          </p>
+        </div>
+      </div>
+
+      <!-- Filter & Search Toolbar -->
+      <div class="history-toolbar">
+        <div class="filter-group">
+          <!-- Search -->
+          <div class="search-box-wrapper">
+            <svg class="search-icon-pos" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="history-search" class="form-control search-input" placeholder="Search inputs, outputs, keys...">
+          </div>
+
+          <!-- Algorithm Filter -->
+          <select id="history-filter-algo" class="form-control" style="width: auto;">
+            <option value="all">All Algorithms (7)</option>
+            <option value="Caesar Cipher">Caesar Cipher</option>
+            <option value="Multiplicative Cipher">Multiplicative Cipher</option>
+            <option value="Hill Cipher">Hill Cipher</option>
+            <option value="AES-GCM">AES-GCM</option>
+            <option value="RSA-OAEP">RSA-OAEP</option>
+            <option value="SHA-256">SHA-256</option>
+            <option value="HMAC-SHA256">HMAC-SHA256</option>
+          </select>
+
+          <!-- Operation Filter -->
+          <select id="history-filter-op" class="form-control" style="width: auto;">
+            <option value="all">All Operations</option>
+            <option value="Encryption">Encryption</option>
+            <option value="Decryption">Decryption</option>
+            <option value="Hash">Hash</option>
+            <option value="HMAC Sign">HMAC Sign</option>
+            <option value="HMAC Verify">HMAC Verify</option>
+          </select>
+        </div>
+
+        <div style="display: flex; gap: 0.5rem;">
+          <button type="button" class="btn btn-outline btn-sm" id="history-clear-all-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+            <span>Clear All History</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- History Table -->
+      <div class="activity-card">
+        <div class="table-responsive">
+          <table class="activity-table">
+            <thead>
+              <tr>
+                <th>Timestamp</th>
+                <th>Algorithm</th>
+                <th>Operation</th>
+                <th>Input Preview</th>
+                <th>Output Preview</th>
+                <th>Details</th>
+                <th style="text-align: right;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="history-table-body">
+              <tr>
+                <td colspan="7" class="empty-state">
+                  <div class="empty-state-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  </div>
+                  <p>Loading operation history...</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div style="margin-top: 1.5rem; background: #F8FAFD; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1rem 1.25rem; font-size: 0.825rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.75rem;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        <span>
+          <strong>Security Guarantee:</strong> In accordance with strict cryptographic privacy standards, private RSA keys, secret AES keys, and HMAC secrets are <strong>never stored</strong> in LocalStorage history. Only public operation metadata is maintained locally.
+        </span>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/history.js"></script>
+</body>
+</html>

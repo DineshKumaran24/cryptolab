@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Algorithm Learning Center – CryptoLab</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .learning-hero {
+      background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFD 100%);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .learning-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin-bottom: 2.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .learning-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 1.25rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .formula-card {
+      background: #F8FAFD;
+      border-left: 4px solid var(--secondary);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.25rem 0;
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      color: var(--primary);
+    }
+
+    .grid-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .info-subbox {
+      background: #FDFEFE;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+    }
+
+    .info-subbox h4 {
+      font-size: 0.925rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+
+    .comparison-table th {
+      background: var(--primary);
+      color: #fff;
+      padding: 0.85rem 1rem;
+      text-align: left;
+    }
+
+    .comparison-table td {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--border-color);
+      vertical-align: top;
+    }
+
+    .comparison-table tr:nth-child(even) td {
+      background: #FAFCFE;
+    }
+
+    @media (max-width: 768px) {
+      .grid-2col { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <div class="brand-icon-wrapper">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        </div>
+        <span>CryptoLab</span>
+        <span class="brand-badge">Toolkit</span>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+          <li class="nav-item"><a href="classical.html" class="nav-link">Classical Ciphers</a></li>
+          <li class="nav-item"><a href="modern.html" class="nav-link">Modern Cryptography</a></li>
+          <li class="nav-item"><a href="learning.html" class="nav-link active">Learning Center</a></li>
+          <li class="nav-item"><a href="history.html" class="nav-link">History</a></li>
+          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="classical.html" class="btn btn-outline btn-sm">Try Algorithms</a>
+        <button class="nav-mobile-toggle" aria-label="Toggle Navigation">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Offcanvas Drawer -->
+  <div class="mobile-drawer-overlay"></div>
+  <aside class="mobile-drawer">
+    <div class="mobile-drawer-header">
+      <div class="nav-brand">
+        <div class="brand-icon-wrapper">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        </div>
+        <span>CryptoLab</span>
+      </div>
+      <button class="mobile-drawer-close btn btn-outline btn-icon-only" aria-label="Close menu">&times;</button>
+    </div>
+    <ul class="mobile-drawer-links">
+      <li><a href="index.html" class="mobile-drawer-link">Home</a></li>
+      <li><a href="dashboard.html" class="mobile-drawer-link">Dashboard</a></li>
+      <li><a href="classical.html" class="mobile-drawer-link">Classical Ciphers</a></li>
+      <li><a href="modern.html" class="mobile-drawer-link">Modern Cryptography</a></li>
+      <li><a href="learning.html" class="mobile-drawer-link active">Learning Center</a></li>
+      <li><a href="history.html" class="mobile-drawer-link">Operation History</a></li>
+      <li><a href="about.html" class="mobile-drawer-link">About & Specifications</a></li>
+    </ul>
+  </aside>
+
+  <!-- App Layout -->
+  <div class="app-layout">
+    <!-- Sidebar for quick on-page jumps -->
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <span class="sidebar-title">Jump to Algorithm</span>
+        <ul class="sidebar-menu">
+          <li><a href="#comparison" class="sidebar-link"><span>Classical vs Modern</span></a></li>
+          <li><a href="#caesar" class="sidebar-link"><span>1. Caesar Cipher</span></a></li>
+          <li><a href="#multiplicative" class="sidebar-link"><span>2. Multiplicative Cipher</span></a></li>
+          <li><a href="#hill" class="sidebar-link"><span>3. Hill Cipher</span></a></li>
+          <li><a href="#aes" class="sidebar-link"><span>4. AES-GCM (128/256)</span></a></li>
+          <li><a href="#rsa" class="sidebar-link"><span>5. RSA-OAEP (2048)</span></a></li>
+          <li><a href="#sha256" class="sidebar-link"><span>6. SHA-256 Hash</span></a></li>
+          <li><a href="#hmac" class="sidebar-link"><span>7. HMAC-SHA-256</span></a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="breadcrumb-bar">
+        <ul class="breadcrumb-list">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item">/</li>
+          <li class="breadcrumb-item active">Algorithm Learning Center</li>
+        </ul>
+      </div>
+
+      <!-- Hero Header -->
+      <div class="learning-hero">
+        <span class="badge badge-modern" style="margin-bottom: 0.75rem;">Educational Cryptographic Compendium</span>
+        <h1 style="font-size: 2.25rem; margin-bottom: 0.75rem;">The Science of Cryptographic Algorithms</h1>
+        <p class="lead" style="margin-bottom: 0;">
+          Comprehensive theoretical reference covering mathematical foundations, working principles, formulas, step-by-step worked examples, security analyses, and practical applications for all 7 platform algorithms.
+        </p>
+      </div>
+
+      <!-- Classical vs Modern Cryptography Comparison Section -->
+      <section id="comparison" class="learning-card">
+        <div class="learning-header">
+          <div>
+            <h2>Classical vs. Modern Cryptography</h2>
+            <p style="color: var(--text-muted); margin: 0;">Fundamental architectural shift from alphabet manipulation to computational security</p>
+          </div>
+          <span class="badge badge-classical">Comprehensive Comparison</span>
+        </div>
+
+        <p>
+          Historically, cryptography relied on <strong>security through obscurity</strong> and physical concealment of the algorithm. Classical ciphers operate on human-readable character sets (such as the 26 letters of the English alphabet) using simple pen-and-paper substitutions and transpositions. In contrast, modern cryptography adheres to <strong>Kerckhoffs's Principle</strong> (the system must remain secure even if the attacker knows everything about the design, except the key) and operates on raw binary bitstreams under rigorous computational hardness assumptions (e.g. integer factorization, discrete logarithms, and pseudorandom permutations).
+        </p>
+
+        <div style="overflow-x: auto;">
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Classical Cryptography</th>
+                <th>Modern Cryptography</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Operating Domain</strong></td>
+                <td>Characters / Alphabet symbols ($A \in [0, 25]$)</td>
+                <td>Binary bit sequences ($0$ and $1$ arrays, bytes)</td>
+              </tr>
+              <tr>
+                <td><strong>Key Space & Entropy</strong></td>
+                <td>Extremely small ($26$ shifts, $12$ coprime keys, or small matrices)</td>
+                <td>Astronomical ($2^{128}$ or $2^{256}$ keys, exceeding atoms in the visible universe)</td>
+              </tr>
+              <tr>
+                <td><strong>Vulnerability Vector</strong></td>
+                <td>Vulnerable to frequency analysis, Kasiski examination, and brute force</td>
+                <td>Mathematically resistant to brute force; vulnerable only to implementation flaws or quantum Shor's algorithm</td>
+              </tr>
+              <tr>
+                <td><strong>Primary Mechanism</strong></td>
+                <td>Simple character substitution and permutation</td>
+                <td>Confusion and diffusion (Substitution-Permutation Networks, Feistel, modular exponentiation)</td>
+              </tr>
+              <tr>
+                <td><strong>Integrity & Authenticity</strong></td>
+                <td>None; easily modified without detection (malleable)</td>
+                <td>Built-in authenticated encryption (GCM MAC tags) and digital signatures</td>
+              </tr>
+              <tr>
+                <td><strong>Modern Use</strong></td>
+                <td>Educational, historical, and recreational puzzles</td>
+                <td>Securing the Internet (TLS/HTTPS), banking, disk encryption, VPNs</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 1. CAESAR CIPHER -->
+      <section id="caesar" class="learning-card">
+        <div class="learning-header">
+          <div>
+            <h2>1. Caesar Cipher</h2>
+            <span class="badge badge-classical">Classical Shift Cipher</span>
+          </div>
+          <a href="classical.html#caesar" class="btn btn-outline btn-sm">Launch Tool &rarr;</a>
+        </div>
+
+        <p><strong>Definition:</strong> The Caesar Cipher is one of the earliest known symmetric monoalphabetic substitution ciphers, attributed to Julius Caesar, who used it to communicate confidential military messages.</p>
+        <p><strong>Purpose:</strong> To conceal military battlefield directives from illiterate enemies or casual interceptors.</p>
+        <p><strong>Working Principle:</strong> Each character in the plaintext is replaced by a character found a fixed integer shift $k$ positions later in the cyclic alphabet.</p>
+
+        <div class="formula-card">
+          <strong>Mathematical Formulas:</strong><br>
+          Encryption: &nbsp; \( C_i = (P_i + k) \pmod{26} \)<br>
+          Decryption: &nbsp; \( P_i = (C_i - k + 26) \pmod{26} \)<br>
+          <em>Where \( P_i, C_i \in \{0, 1, \dots, 25\} \) correspond to letters A=0 through Z=25.</em>
+        </div>
+
+        <h4>Step-by-Step Worked Example:</h4>
+        <p>Encrypt plaintext <code>"HELLO"</code> with key $k = 3$:</p>
+        <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+          <li>H (index 7): &nbsp; \((7 + 3) \pmod{26} = 10 \rightarrow \mathbf{K}\)</li>
+          <li>E (index 4): &nbsp; \((4 + 3) \pmod{26} = 7 \rightarrow \mathbf{H}\)</li>
+          <li>L (index 11): &nbsp; \((11 + 3) \pmod{26} = 14 \rightarrow \mathbf{O}\)</li>
+          <li>L (index 11): &nbsp; \((11 + 3) \pmod{26} = 14 \rightarrow \mathbf{O}\)</li>
+          <li>O (index 14): &nbsp; \((14 + 3) \pmod{26} = 17 \rightarrow \mathbf{R}\)</li>
+        </ul>
+        <p><strong>Ciphertext:</strong> <code>"KHOOR"</code>.</p>
+
+        <div class="grid-2col">
+          <div class="info-subbox">
+            <h4>Advantages</h4>
+            <ul>
+              <li>Extremely simple to compute by hand.</li>
+              <li>Minimal memory and algorithmic complexity: \(\mathcal{O}(N)\).</li>
+              <li>Excellent introductory vehicle for modular arithmetic.</li>
+            </ul>
+          </div>
+          <div class="info-subbox">
+            <h4>Limitations & Security Considerations</h4>
+            <ul>
+              <li>Only 25 unique non-trivial keys; trivially broken via brute force in milliseconds.</li>
+              <li>Vulnerable to unigram frequency analysis (letter 'E' is identifiable).</li>
+              <li>Completely insecure for any modern confidential application.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. MULTIPLICATIVE CIPHER -->
+      <section id="multiplicative" class="learning-card">
+        <div class="learning-header">
+          <div>
+            <h2>2. Multiplicative Cipher</h2>
+            <span class="badge badge-classical">Modular Arithmetic</span>
+          </div>
+          <a href="classical.html#multiplicative" class="btn btn-outline btn-sm">Launch Tool &rarr;</a>
+        </div>
+
+        <p><strong>Definition:</strong> A monoalphabetic substitution cipher in which each plaintext numerical value is multiplied by a key $k$ modulo 26.</p>
+        <p><strong>Working Principle:</strong> Maps letter index $P$ to ciphertext index $C$ via modular multiplication. In order for the cipher to be bi-directional (decryptable), the key $k$ must possess a modular multiplicative inverse $k^{-1}$ modulo 26. This condition requires that $\gcd(k, 26) = 1$. The only valid keys in modulo 26 are $\{1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25\}$.</p>
+
+        <div class="formula-card">
+          <strong>Mathematical Formulas:</strong><br>
+          Encryption: &nbsp; \( C_i = (P_i \times k) \pmod{26} \)<br>
+          Decryption: &nbsp; \( P_i = (C_i \times k^{-1}) \pmod{26} \)<br>
+          Condition: &nbsp; \( (k \times k^{-1}) \equiv 1 \pmod{26} \iff \gcd(k, 26) = 1 \)
+        </div>
+
+        <h4>Step-by-Step Worked Example:</h4>
+        <p>Encrypt <code>"HELLO"</code> with key $k = 5$:</p>
+        <p>Check coprimality: $\gcd(5, 26) = 1$. Modular inverse of 5 mod 26: $5 \times 21 = 105 = 4(26) + 1 \equiv 1 \pmod{26}$, so $k^{-1} = 21$.</p>
+        <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+          <li>H (7): &nbsp; \((7 \times 5) \pmod{26} = 35 \pmod{26} = 9 \rightarrow \mathbf{J}\)</li>
+          <li>E (4): &nbsp; \((4 \times 5) \pmod{26} = 20 \pmod{26} = 20 \rightarrow \mathbf{U}\)</li>
+          <li>L (11): &nbsp; \((11 \times 5) \pmod{26} = 55 \pmod{26} = 3 \rightarrow \mathbf{D}\)</li>
+          <li>L (11): &nbsp; \((11 \times 5) \pmod{26} = 55 \pmod{26} = 3 \rightarrow \mathbf{D}\)</li>
+          <li>O (14): &nbsp; \((14 \times 5) \pmod{26} = 70 \pmod{26} = 18 \rightarrow \mathbf{S}\) (or for A (0): \(0 \times 5 = 0 \rightarrow \mathbf{A}\))</li>
+        </ul>
+        <p><strong>Ciphertext:</strong> <code>"JUDDS"</code> (for input "HELLA": <code>"JUDDA"</code>).</p>
+      </section>
+
+      <!-- 3. HILL CIPHER -->
+      <section id="hill" class="learning-card">
+        <div class="learning-header">
+          <div>
+            <h2>3. Hill Cipher</h2>
+            <span class="badge badge-classical">Polygraphic Matrix Cipher</span>
+          </div>
+          <a href="classical.html#hill" class="btn btn-outline btn-sm">Launch Tool &rarr;</a>
+        </div>
+
+        <p><strong>Definition:</strong> Invented by mathematician Lester S. Hill in 1929, the Hill Cipher is a polygraphic substitution cipher based on linear algebra and modular matrix multiplication.</p>
+        <p><strong>Working Principle:</strong> Partitions plaintext into $N$-character vectors and multiplies each vector by an $N \times N$ matrix $K$ modulo 26. Decryption multiplies ciphertext vectors by the modular inverse matrix $K^{-1}$. For $K^{-1}$ to exist, $\det(K)$ must be coprime with 26 ($\gcd(\det(K), 26) = 1$).</p>
+
+        <div class="formula-card">
+          <strong>Mathematical Formulas:</strong><br>
+          Vector Encryption: &nbsp; \( \mathbf{C} = (K \cdot \mathbf{P}) \pmod{26} \)<br>
+          Vector Decryption: &nbsp; \( \mathbf{P} = (K^{-1} \cdot \mathbf{C}) \pmod{26} \)<br>
+          Modular Inverse Matrix: &nbsp; \( K^{-1} = \left( \det(K)^{-1} \cdot \operatorname{adj}(K) \right) \pmod{26} \)
+        </div>
+
+        <h4>Step-by-Step Worked Example (2x2):</h4>
+        <p>Key Matrix $K = \begin{pmatrix} 3 & 3 \\ 2 & 5 \end{pmatrix}$. Plaintext: <code>"HELP"</code>.</p>
+        <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+          <li>$\det(K) = (3 \times 5 - 3 \times 2) = 15 - 6 = 9 \pmod{26}$. $\gcd(9, 26) = 1$.</li>
+          <li>Modular inverse of determinant: $9 \times 3 = 27 \equiv 1 \pmod{26} \Rightarrow \det(K)^{-1} = 3$.</li>
+          <li>Adjugate matrix: $\operatorname{adj}(K) = \begin{pmatrix} 5 & -3 \\ -2 & 3 \end{pmatrix} \equiv \begin{pmatrix} 5 & 23 \\ 24 & 3 \end{pmatrix} \pmod{26}$.</li>
+          <li>Inverse Matrix $K^{-1} = 3 \times \begin{pmatrix} 5 & 23 \\ 24 & 3 \end{pmatrix} \equiv \begin{pmatrix} 15 & 17 \\ 20 & 9 \end{pmatrix} \pmod{26}$.</li>
+          <li>Block 1: H(7), E(4) &rarr; $\begin{pmatrix} 3(7) + 3(4) \\ 2(7) + 5(4) \end{pmatrix} = \begin{pmatrix} 33 \\ 34 \end{pmatrix} \equiv \begin{pmatrix} 7 \\ 8 \end{pmatrix} \pmod{26} \rightarrow \mathbf{H}, \mathbf{I}$.</li>
+          <li>Block 2: L(11), P(15) &rarr; $\begin{pmatrix} 3(11) + 3(15) \\ 2(11) + 5(15) \end{pmatrix} = \begin{pmatrix} 78 \\ 97 \end{pmatrix} \equiv \begin{pmatrix} 0 \\ 19 \end{pmatrix} \pmod{26} \rightarrow \mathbf{A}, \mathbf{T}$.</li>
+        </ul>
+        <p><strong>Ciphertext:</strong> <code>"HIAT"</code>. Decrypting with $K^{-1}$ restores <code>"HELP"</code>.</p>
+      </section>
+
+      <!-- 4. AES-GCM -->
+      <section id="aes" class="learning-card">
+        <div class="learning-header">
+          <div>
+            <h2>4. AES-GCM (Advanced Encryption Standard)</h2>
+            <span class="badge badge-modern">Modern Authenticated Symmetric</span>
+          </div>
+          <a href="modern.html#aes" class="btn btn-primary btn-sm">Launch Tool &rarr;</a>
+        </div>
+
+        <p><strong>Definition:</strong> Established by NIST in 2001 (FIPS 197), AES is an electronic data encryption specification based on the Rijndael cipher. In Galois/Counter Mode (GCM), it functions as an Authenticated Encryption with Associated Data (AEAD) scheme.</p>
+        <p><strong>Working Principle:</strong> AES-GCM uses CTR (Counter) mode for confidentiality and Galois field multiplication (over $GF(2^{128})$) to compute an authentication tag (GMAC). Every encryption generates a distinct 96-bit Initialization Vector (IV).</p>
+
+        <div class="formula-card">
+          <strong>Cryptographic Structure:</strong><br>
+          Keystream Generation: &nbsp; \( S_i = \operatorname{AES}_K(\text{IV} \parallel \operatorname{ctr}_i) \)<br>
+          Ciphertext: &nbsp; \( C_i = P_i \oplus S_i \)<br>
+          Tag Computation: &nbsp; \( T = \operatorname{GHASH}_H(\text{AAD} \parallel C) \oplus \operatorname{AES}_K(\text{IV} \parallel 0^{31}1) \)
+        </div>
+
+        <div class="grid-2col">
+          <div class="info-subbox">
+            <h4>Advantages & Practical Applications</h4>
+            <ul>
+              <li>Hardware accelerated in modern CPUs (AES-NI instructions).</li>
+              <li>Simultaneous encryption and integrity verification in a single pass.</li>
+              <li>Standard for TLS 1.3, SSH, IPsec, Wi-Fi WPA3, and disk encryption (BitLocker, FileVault).</li>
+            </ul>
+          </div>
+          <div class="info-subbox">
+            <h4>Security Considerations</h4>
+            <ul>
+              <li><strong>Catastrophic IV Reuse:</strong> Never reuse an IV with the same key. Reusing an IV compromises the GHASH key and destroys authenticity.</li>
+              <li>128-bit key offers ~128 bits of security; 256-bit key provides quantum resistance against Grover's algorithm ($2^{128}$ quantum operations).</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. RSA-OAEP -->
+      <section id="rsa" class="learning-card">
+        <div class="learning-header">
+          <div>
+            <h2>5. RSA-OAEP (Rivest–Shamir–Adleman)</h2>
+            <span class="badge badge-modern">Asymmetric Public-Key</span>
+          </div>
+          <a href="modern.html#rsa" class="btn btn-primary btn-sm">Launch Tool &rarr;</a>
+        </div>
+
+        <p><strong>Definition:</strong> Published in 1977 by Ron Rivest, Adi Shamir, and Leonard Adleman, RSA is the premier asymmetric public-key cryptosystem. RSA-OAEP incorporates Optimal Asymmetric Encryption Padding (Bellare & Rogaway).</p>
+        <p><strong>Working Principle:</strong> Security rests on the computational intractability of factoring large composite semiprimes $n = p \times q$. The public exponent $e$ and modulus $n$ are published; the private exponent $d$ satisfies $e \cdot d \equiv 1 \pmod{\phi(n)}$.</p>
+
+        <div class="formula-card">
+          <strong>Mathematical Core:</strong><br>
+          Modulus & Totient: &nbsp; \( n = p \cdot q, \quad \lambda(n) = \operatorname{lcm}(p-1, q-1) \)<br>
+          Key Derivation: &nbsp; \( d \equiv e^{-1} \pmod{\lambda(n)} \)<br>
+          Encryption: &nbsp; \( c = m^e \pmod{n} \)<br>
+          Decryption: &nbsp; \( m = c^d \pmod{n} \)
+        </div>
+
+        <div class="grid-2col">
+          <div class="info-subbox">
+            <h4>Advantages</h4>
+            <ul>
+              <li>Solves the key exchange problem: parties can communicate without sharing a prior secret.</li>
+              <li>Foundation for digital signatures and certificates.</li>
+            </ul>
+          </div>
+          <div class="info-subbox">
+            <h4>Limitations</h4>
+            <ul>
+              <li>Computationally slow compared to AES (~1000x slower).</li>
+              <li>Restricted payload size: 2048-bit RSA-OAEP can encrypt at most 190 bytes. Used for hybrid key wrapping.</li>
+              <li>Vulnerable to Shor's polynomial-time quantum factoring algorithm.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. SHA-256 -->
+      <section id="sha256" class="learning-card">
+        <div class="learning-header">
+          <div>
+            <h2>6. SHA-256 Cryptographic Hash</h2>
+            <span class="badge badge-hash">FIPS 180-4 Secure Hash</span>
+          </div>
+          <a href="modern.html#sha256" class="btn btn-subtle btn-sm">Launch Tool &rarr;</a>
+        </div>
+
+        <p><strong>Definition:</strong> Part of the SHA-2 family designed by the United States National Security Agency (NSA), SHA-256 is a cryptographic hash function that transforms arbitrary-length inputs into a fixed 256-bit (32-byte) digest.</p>
+        <p><strong>Working Principle:</strong> Employs the Merkle–Damgård construction with a Davies–Meyer compression function. Operates on 512-bit message blocks across 64 compression rounds using logical bitwise operations ($\operatorname{Ch}, \operatorname{Maj}, \Sigma_0, \Sigma_1, \sigma_0, \sigma_1$).</p>
+
+        <div class="formula-card">
+          <strong>Security Properties:</strong><br>
+          1. <em>Pre-image Resistance (One-Way):</em> Infeasible to find $m$ such that $H(m) = h$.<br>
+          2. <em>Second Pre-image Resistance:</em> Infeasible given $m_1$ to find $m_2 \neq m_1$ where $H(m_1) = H(m_2)$.<br>
+          3. <em>Collision Resistance:</em> Infeasible to find any pair $(m_1, m_2)$ with $H(m_1) = H(m_2)$ in less than $2^{128}$ operations.
+        </div>
+      </section>
+
+      <!-- 7. HMAC-SHA-256 -->
+      <section id="hmac" class="learning-card">
+        <div class="learning-header">
+          <div>
+            <h2>7. HMAC-SHA-256</h2>
+            <span class="badge badge-mac">Message Authentication Code</span>
+          </div>
+          <a href="modern.html#hmac" class="btn btn-subtle btn-sm">Launch Tool &rarr;</a>
+        </div>
+
+        <p><strong>Definition:</strong> Keyed-Hash Message Authentication Code (HMAC) is a specific construction defined in RFC 2104 that combines a cryptographic hash function with a secret key.</p>
+        <p><strong>Working Principle:</strong> Applies the underlying hash function twice using inner and outer key padding values ($ipad = \text{0x36}$, $opad = \text{0x5C}$). This dual-pass structure prevents <em>length extension attacks</em> that affect bare Merkle-Damgård hashes.</p>
+
+        <div class="formula-card">
+          <strong>RFC 2104 Formal Definition:</strong><br>
+          \( \operatorname{HMAC}(K, m) = H\Big( (K' \oplus opad) \;\parallel\; H\big( (K' \oplus ipad) \parallel m \big) \Big) \)<br>
+          <em>Where $K'$ is the key padded or hashed to the block size (64 bytes for SHA-256).</em>
+        </div>
+
+        <div class="grid-2col">
+          <div class="info-subbox">
+            <h4>Practical Applications</h4>
+            <ul>
+              <li>REST API authentication (Amazon Web Services AWS Signature Version 4).</li>
+              <li>JSON Web Signatures (JWT with HS256).</li>
+              <li>Integrity verification in payment gateways and webhook event notifications (Stripe, GitHub webhooks).</li>
+            </ul>
+          </div>
+          <div class="info-subbox">
+            <h4>Security Considerations</h4>
+            <ul>
+              <li>Constant-time comparison must be utilized when verifying received tags to prevent side-channel timing attacks.</li>
+              <li>Secret key length should be at least equal to the hash output length (256 bits).</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/navigation.js"></script>
+</body>
+</html>

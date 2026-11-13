@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CryptoLab – Interactive Cryptography Toolkit</title>
+  <meta name="description" content="Explore the Science of Cryptography. An interactive academic platform for classical ciphers, modern AES/RSA encryption, SHA-256 hashing, and HMAC authentication.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Landing Page Specific Enhancements */
+    .hero-section {
+      padding: 5rem 0 4rem;
+      background: radial-gradient(circle at 80% 20%, rgba(57, 120, 197, 0.08) 0%, transparent 60%),
+                  radial-gradient(circle at 10% 80%, rgba(24, 169, 153, 0.06) 0%, transparent 50%),
+                  var(--bg-page);
+      border-bottom: 1px solid var(--border-color);
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: 3.5rem;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--secondary-light);
+      color: var(--secondary);
+      border: 1px solid #D2E4F8;
+      padding: 0.35rem 0.9rem;
+      border-radius: var(--radius-full);
+      font-size: 0.825rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 3px rgba(24, 169, 153, 0.2);
+    }
+
+    .hero-title {
+      font-size: 3.25rem;
+      line-height: 1.15;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-title span.highlight {
+      color: var(--secondary);
+      position: relative;
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      max-width: 580px;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* Custom Cryptography Interactive Illustration */
+    .crypto-hero-card {
+      background: #FFFFFF;
+      border: 1px solid #DFE7F2;
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: 0 20px 45px -10px rgba(24, 59, 86, 0.12);
+      position: relative;
+    }
+
+    .cipher-terminal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .terminal-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .t-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .t-dot-red { background: #EF4444; }
+    .t-dot-yellow { background: #F59E0B; }
+    .t-dot-green { background: #10B981; }
+
+    .terminal-chip {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    .cipher-flow-diagram {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .flow-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #F8FAFD;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 1rem;
+      font-size: 0.85rem;
+    }
+
+    .flow-label {
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .flow-val {
+      font-family: var(--font-mono);
+      color: var(--secondary);
+      font-weight: 600;
+    }
+
+    .flow-arrow-down {
+      display: flex;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 1.1rem;
+      margin: -2px 0;
+    }
+
+    /* Landing Statistics Section */
+    .landing-stats {
+      padding: 3rem 0;
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .landing-stat-number {
+      font-size: 2.75rem;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1.1;
+      margin-bottom: 0.25rem;
+    }
+
+    .landing-stat-label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    /* Section Styles */
+    .landing-section {
+      padding: 5rem 0;
+    }
+
+    .landing-section.alt-bg {
+      background: #FFFFFF;
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .section-headline {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 3.5rem;
+    }
+
+    .section-tag {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--secondary);
+      margin-bottom: 0.5rem;
+      display: inline-block;
+    }
+
+    .section-title {
+      font-size: 2.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .feature-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-sm);
+      transition: all var(--transition-normal);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: #D1DEED;
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      background: var(--secondary-light);
+      color: var(--secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      margin-bottom: 1.25rem;
+    }
+
+    @media (max-width: 992px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-title { font-size: 2.5rem; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+      .features-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <div class="brand-icon-wrapper">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        </div>
+        <span>CryptoLab</span>
+        <span class="brand-badge">Toolkit</span>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="index.html" class="nav-link active">Home</a></li>
+          <li class="nav-item"><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+          <li class="nav-item"><a href="classical.html" class="nav-link">Classical Ciphers</a></li>
+          <li class="nav-item"><a href="modern.html" class="nav-link">Modern Cryptography</a></li>
+          <li class="nav-item"><a href="learning.html" class="nav-link">Learning Center</a></li>
+          <li class="nav-item"><a href="history.html" class="nav-link">History</a></li>
+          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="dashboard.html" class="btn btn-primary btn-sm">Launch App</a>
+        <button class="nav-mobile-toggle" aria-label="Toggle Navigation">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Offcanvas Drawer -->
+  <div class="mobile-drawer-overlay"></div>
+  <aside class="mobile-drawer">
+    <div class="mobile-drawer-header">
+      <div class="nav-brand">
+        <div class="brand-icon-wrapper">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        </div>
+        <span>CryptoLab</span>
+      </div>
+      <button class="mobile-drawer-close btn btn-outline btn-icon-only" aria-label="Close menu">&times;</button>
+    </div>
+    <ul class="mobile-drawer-links">
+      <li><a href="index.html" class="mobile-drawer-link active">Home</a></li>
+      <li><a href="dashboard.html" class="mobile-drawer-link">Dashboard</a></li>
+      <li><a href="classical.html" class="mobile-drawer-link">Classical Ciphers</a></li>
+      <li><a href="modern.html" class="mobile-drawer-link">Modern Cryptography</a></li>
+      <li><a href="learning.html" class="mobile-drawer-link">Learning Center</a></li>
+      <li><a href="history.html" class="mobile-drawer-link">Operation History</a></li>
+      <li><a href="about.html" class="mobile-drawer-link">About & Specifications</a></li>
+    </ul>
+  </aside>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-left">
+          <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            Academic Information Security Platform
+          </div>
+          <h1 class="hero-title">
+            Explore the Science of <span class="highlight">Cryptography</span>
+          </h1>
+          <p class="hero-subtitle">
+            An interactive cryptography toolkit and laboratory. Execute real Caesar, Multiplicative, and Hill classical ciphers alongside modern military-grade AES-GCM, RSA-OAEP, SHA-256 hashing, and HMAC authentication with live mathematical step-by-step proofs.
+          </p>
+          <div class="hero-cta-group">
+            <a href="classical.html" class="btn btn-primary btn-lg">
+              <span>Start Encrypting</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+            <a href="learning.html" class="btn btn-outline btn-lg">
+              <span>Explore Algorithms</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="crypto-hero-card">
+            <div class="cipher-terminal-header">
+              <div class="terminal-dots">
+                <span class="t-dot t-dot-red"></span>
+                <span class="t-dot t-dot-yellow"></span>
+                <span class="t-dot t-dot-green"></span>
+              </div>
+              <span class="terminal-chip">Web Crypto Native</span>
+            </div>
+
+            <div class="cipher-flow-diagram">
+              <div class="flow-row">
+                <span class="flow-label">Plaintext Input</span>
+                <span class="flow-val">"CONFIDENTIAL"</span>
+              </div>
+              <div class="flow-arrow-down">&darr;</div>
+              <div class="flow-row" style="background: var(--secondary-light); border-color: #D2E4F8;">
+                <span class="flow-label" style="color: var(--secondary);">AES-GCM (256-bit)</span>
+                <span class="flow-val">IV: 96-bit Secure Random</span>
+              </div>
+              <div class="flow-arrow-down">&darr;</div>
+              <div class="flow-row">
+                <span class="flow-label">Ciphertext (Base64)</span>
+                <span class="flow-val" style="color: var(--accent);">k8Z1pX...99aQ==</span>
+              </div>
+              <div class="flow-arrow-down">&darr;</div>
+              <div class="flow-row" style="background: var(--success-light); border-color: var(--success-border);">
+                <span class="flow-label" style="color: #065F46;">SHA-256 Verification</span>
+                <span class="flow-val" style="color: #065F46;">Tag Authenticated ✓</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Statistics Counter Section -->
+  <section class="landing-stats">
+    <div class="container">
+      <div class="stats-row">
+        <div class="stat-item">
+          <div class="landing-stat-number">7</div>
+          <div class="landing-stat-label">Full Working Algorithms</div>
+        </div>
+        <div class="stat-item">
+          <div class="landing-stat-number">3</div>
+          <div class="landing-stat-label">Classical Modular Ciphers</div>
+        </div>
+        <div class="stat-item">
+          <div class="landing-stat-number">4</div>
+          <div class="landing-stat-label">Modern Cryptographic Tools</div>
+        </div>
+        <div class="stat-item">
+          <div class="landing-stat-number">100%</div>
+          <div class="landing-stat-label">Client-Side & Secure</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Algorithm Categories Section -->
+  <section class="landing-section">
+    <div class="container">
+      <div class="section-headline">
+        <span class="section-tag">Toolkit Overview</span>
+        <h2 class="section-title">Cryptographic Systems Implemented</h2>
+        <p class="lead">From ancient substitution ciphers to state-of-the-art authenticated encryption standards used in modern banking and cybersecurity.</p>
+      </div>
+
+      <div class="features-grid" style="grid-template-columns: repeat(2, 1fr); margin-bottom: 2rem;">
+        <!-- Classical Box -->
+        <div class="feature-card" style="border-top: 4px solid #F59E0B;">
+          <div class="feature-icon" style="background: #FEF3C7; color: #D97706;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+          </div>
+          <h3>Classical Ciphers</h3>
+          <p style="color: var(--text-muted); margin: 0.5rem 0 1.25rem;">
+            Explore the historical origins of cryptography through modular arithmetic mod 26 and polygraphic linear algebra.
+          </p>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.5rem;">
+            <li style="font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem;">
+              <span style="color: #F59E0B;">●</span> <strong>Caesar Cipher:</strong> Numerical shift with case preservation
+            </li>
+            <li style="font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem;">
+              <span style="color: #F59E0B;">●</span> <strong>Multiplicative Cipher:</strong> Modular inverse and coprime verification
+            </li>
+            <li style="font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem;">
+              <span style="color: #F59E0B;">●</span> <strong>Hill Cipher:</strong> 2x2 and 3x3 matrix multiplication mod 26
+            </li>
+          </ul>
+          <a href="classical.html" class="btn btn-outline btn-sm">Open Classical Toolkit &rarr;</a>
+        </div>
+
+        <!-- Modern Box -->
+        <div class="feature-card" style="border-top: 4px solid var(--secondary);">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          </div>
+          <h3>Modern Cryptography</h3>
+          <p style="color: var(--text-muted); margin: 0.5rem 0 1.25rem;">
+            Industry-standard symmetric, asymmetric, hashing, and authentication primitives powered directly by the browser's hardware-accelerated Web Crypto API.
+          </p>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.5rem;">
+            <li style="font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem;">
+              <span style="color: var(--secondary);">●</span> <strong>AES-GCM (128 & 256-bit):</strong> Authenticated encryption with fresh IVs
+            </li>
+            <li style="font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem;">
+              <span style="color: var(--secondary);">●</span> <strong>RSA-OAEP (2048-bit):</strong> Asymmetric key generation and encryption
+            </li>
+            <li style="font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem;">
+              <span style="color: var(--secondary);">●</span> <strong>SHA-256:</strong> Cryptographic one-way hashing with avalanche analysis
+            </li>
+            <li style="font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem;">
+              <span style="color: var(--secondary);">●</span> <strong>HMAC-SHA-256:</strong> Message authentication code generation & verification
+            </li>
+          </ul>
+          <a href="modern.html" class="btn btn-primary btn-sm">Open Modern Toolkit &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="landing-section alt-bg">
+    <div class="container">
+      <div class="section-headline">
+        <span class="section-tag">Key Features</span>
+        <h2 class="section-title">Built for Education & Academic Rigor</h2>
+        <p class="lead">Every operation is backed by real cryptographic mathematics and zero mock implementations.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon" style="background: var(--accent-light); color: var(--accent);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="m4.93 4.93 4.24 4.24"></path><path d="m14.83 9.17 4.24-4.24"></path><path d="m14.83 14.83 4.24 4.24"></path><path d="m9.17 14.83-4.24 4.24"></path></svg>
+          </div>
+          <h4>Zero Server Dependencies</h4>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">
+            Runs 100% inside your browser using the native Web Crypto API and modern JavaScript. Your sensitive inputs and keys never leave your machine.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon" style="background: #EDE9FE; color: #7C3AED;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+          </div>
+          <h4>Step-by-Step Proof Tracing</h4>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">
+            Inspect the exact mathematical transformation for every letter and vector block, including modular arithmetic mod 26 and matrix multiplication.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon" style="background: #E0F2FE; color: #0284C7;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          </div>
+          <h4>Operation History & CSV Export</h4>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">
+            Automatically logs non-sensitive metadata for your operations in LocalStorage. Search, filter, and export records as standard CSV files.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Global Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-brand">
+            <div class="brand-icon-wrapper">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            </div>
+            <span>CryptoLab</span>
+          </a>
+          <p>
+            An academic interactive cryptography platform designed for students, researchers, and security practitioners to master classical and modern cryptographic systems.
+          </p>
+          <div style="margin-top: 1rem;">
+            <span class="academic-badge">Academic Security Project</span>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Classical Ciphers</h4>
+          <ul class="footer-links">
+            <li><a href="classical.html#caesar">Caesar Cipher</a></li>
+            <li><a href="classical.html#multiplicative">Multiplicative Cipher</a></li>
+            <li><a href="classical.html#hill">Hill Cipher (2x2 & 3x3)</a></li>
+            <li><a href="learning.html#classical-principles">Classical Principles</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Modern Cryptography</h4>
+          <ul class="footer-links">
+            <li><a href="modern.html#aes">AES-GCM Authenticated</a></li>
+            <li><a href="modern.html#rsa">RSA-OAEP Asymmetric</a></li>
+            <li><a href="modern.html#sha256">SHA-256 Hashing</a></li>
+            <li><a href="modern.html#hmac">HMAC-SHA-256 Auth</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="dashboard.html">User Dashboard</a></li>
+            <li><a href="learning.html">Learning Center</a></li>
+            <li><a href="history.html">Operation History</a></li>
+            <li><a href="about.html">About & Academic Specs</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 CryptoLab – Interactive Cryptography Algorithm Implementation Platform. All rights reserved.
+        </div>
+        <div>
+          Light Theme &bull; Web Crypto API &bull; Client-Side Static Architecture
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script src="js/navigation.js"></script>
+</body>
+</html>

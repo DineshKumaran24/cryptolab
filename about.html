@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About – CryptoLab</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .about-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .spec-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+      margin: 1.5rem 0;
+    }
+
+    .spec-box {
+      background: #F8FAFD;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+    }
+
+    .spec-box h4 {
+      font-size: 0.95rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .spec-box p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    .tech-pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .tech-pill {
+      background: var(--secondary-light);
+      color: var(--secondary);
+      padding: 0.35rem 0.85rem;
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <div class="brand-icon-wrapper">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        </div>
+        <span>CryptoLab</span>
+        <span class="brand-badge">Toolkit</span>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+          <li class="nav-item"><a href="classical.html" class="nav-link">Classical Ciphers</a></li>
+          <li class="nav-item"><a href="modern.html" class="nav-link">Modern Cryptography</a></li>
+          <li class="nav-item"><a href="learning.html" class="nav-link">Learning Center</a></li>
+          <li class="nav-item"><a href="history.html" class="nav-link">History</a></li>
+          <li class="nav-item"><a href="about.html" class="nav-link active">About</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="classical.html" class="btn btn-primary btn-sm">Launch Tools</a>
+        <button class="nav-mobile-toggle" aria-label="Toggle Navigation">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Offcanvas Drawer -->
+  <div class="mobile-drawer-overlay"></div>
+  <aside class="mobile-drawer">
+    <div class="mobile-drawer-header">
+      <div class="nav-brand">
+        <div class="brand-icon-wrapper">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        </div>
+        <span>CryptoLab</span>
+      </div>
+      <button class="mobile-drawer-close btn btn-outline btn-icon-only" aria-label="Close menu">&times;</button>
+    </div>
+    <ul class="mobile-drawer-links">
+      <li><a href="index.html" class="mobile-drawer-link">Home</a></li>
+      <li><a href="dashboard.html" class="mobile-drawer-link">Dashboard</a></li>
+      <li><a href="classical.html" class="mobile-drawer-link">Classical Ciphers</a></li>
+      <li><a href="modern.html" class="mobile-drawer-link">Modern Cryptography</a></li>
+      <li><a href="learning.html" class="mobile-drawer-link">Learning Center</a></li>
+      <li><a href="history.html" class="mobile-drawer-link">Operation History</a></li>
+      <li><a href="about.html" class="mobile-drawer-link active">About & Specifications</a></li>
+    </ul>
+  </aside>
+
+  <!-- App Layout -->
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <span class="sidebar-title">Toolkit Tools</span>
+        <ul class="sidebar-menu">
+          <li>
+            <a href="dashboard.html" class="sidebar-link">
+              <div class="sidebar-link-content">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                <span>Dashboard</span>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="classical.html" class="sidebar-link">
+              <div class="sidebar-link-content">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                <span>Classical Ciphers</span>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="modern.html" class="sidebar-link">
+              <div class="sidebar-link-content">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                <span>Modern Cryptography</span>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="learning.html" class="sidebar-link">
+              <div class="sidebar-link-content">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                <span>Learning Center</span>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="breadcrumb-bar">
+        <ul class="breadcrumb-list">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item">/</li>
+          <li class="breadcrumb-item active">About CryptoLab</li>
+        </ul>
+      </div>
+
+      <!-- Overview Card -->
+      <section class="about-card">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.25rem;">
+          <div>
+            <span class="badge badge-modern">Academic Information Security Specification</span>
+            <h1 style="font-size: 2.25rem; margin-top: 0.5rem; margin-bottom: 0.5rem;">About CryptoLab</h1>
+            <p class="lead" style="margin: 0;">Interactive Cryptography Algorithm Implementation Platform</p>
+          </div>
+          <span class="academic-badge">Final Academic Release v2.0</span>
+        </div>
+
+        <p>
+          <strong>CryptoLab</strong> is an academic, fully functional laboratory application developed for computer science and cybersecurity education. It bridges the gap between theoretical cryptographic mathematics and practical modern security software engineering. Rather than providing simulated mocks or superficial static prototypes, CryptoLab runs genuine cryptographic algorithms directly in the user's browser, combining historical pen-and-paper ciphers with current international standards.
+        </p>
+
+        <h3 style="margin-top: 1.75rem; margin-bottom: 0.75rem;">Core Project Objectives</h3>
+        <ul style="margin-left: 1.5rem; color: var(--text-main); line-height: 1.8;">
+          <li><strong>Empirical Cryptographic Education:</strong> Demystify modular arithmetic, matrix inverses, and asymmetric key exchange through interactive step-by-step intermediate visualizations.</li>
+          <li><strong>Mathematical Rigor:</strong> Guarantee 100% adherence to standard cryptographic proofs, including coprimality checks modulo 26, modular determinants, and constant-time authentication verifications.</li>
+          <li><strong>Native Modern Security:</strong> Leverage the browser's hardware-accelerated <code>window.crypto.subtle</code> Web Crypto API for authentic FIPS 197 AES-GCM, RSA-OAEP 2048-bit asymmetric encryption, SHA-256 hashing, and RFC 2104 HMAC verification.</li>
+          <li><strong>Client-Side Privacy:</strong> Ensure complete privacy and zero backend dependency. Sensitive plaintext, keys, and operations never cross the network.</li>
+          <li><strong>Innovative Light Theme UI/UX:</strong> Break away from cliché dark hacker aesthetics by adopting a clean, accessible, modern SaaS/fintech developer aesthetic inspired by world-class software tools.</li>
+        </ul>
+      </section>
+
+      <!-- Algorithms Implemented -->
+      <section class="about-card">
+        <h2>Algorithms Implemented</h2>
+        <p style="color: var(--text-muted);">Seven complete, non-mocked cryptographic engines across four domains:</p>
+
+        <div class="spec-grid">
+          <div class="spec-box" style="border-left: 4px solid #F59E0B;">
+            <h4>Caesar Cipher</h4>
+            <p>Additive monoalphabetic shift cipher with modulo 26 ring reduction, full case retention, and symbol preservation.</p>
+          </div>
+
+          <div class="spec-box" style="border-left: 4px solid #F59E0B;">
+            <h4>Multiplicative Cipher</h4>
+            <p>Modular multiplication with Extended Euclidean Algorithm inverse key derivation and coprime validation.</p>
+          </div>
+
+          <div class="spec-box" style="border-left: 4px solid #F59E0B;">
+            <h4>Hill Cipher (2x2 & 3x3)</h4>
+            <p>Polygraphic block matrix multiplication mod 26 with cofactor expansion, adjugate inversion, and vector padding.</p>
+          </div>
+
+          <div class="spec-box" style="border-left: 4px solid var(--secondary);">
+            <h4>AES-GCM (128 & 256)</h4>
+            <p>Authenticated encryption with associated data (AEAD) using fresh cryptographically secure random 96-bit IVs and 128-bit GMAC tags.</p>
+          </div>
+
+          <div class="spec-box" style="border-left: 4px solid var(--secondary);">
+            <h4>RSA-OAEP (2048-bit)</h4>
+            <p>Asymmetric public-key encryption with SHA-256 padding, generating standard SPKI and PKCS#8 PEM formatted keypairs.</p>
+          </div>
+
+          <div class="spec-box" style="border-left: 4px solid #8B5CF6;">
+            <h4>SHA-256 Hash Digest</h4>
+            <p>FIPS 180-4 compliant 256-bit one-way cryptographic hash with interactive Hamming distance Avalanche Effect comparison.</p>
+          </div>
+
+          <div class="spec-box" style="border-left: 4px solid var(--accent);">
+            <h4>HMAC-SHA-256</h4>
+            <p>RFC 2104 / RFC 4231 keyed-hash message authentication code generation and constant-time integrity verification.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Technology Stack -->
+      <section class="about-card">
+        <h2>Technology Stack & Architecture</h2>
+        <p style="color: var(--text-muted);">Zero backend requirements, 100% static hosting compatibility:</p>
+
+        <div class="tech-pill-list">
+          <span class="tech-pill">HTML5 (Semantic Elements)</span>
+          <span class="tech-pill">CSS3 (Custom Properties & Flex/Grid)</span>
+          <span class="tech-pill">JavaScript ES6+</span>
+          <span class="tech-pill">W3C Web Crypto API (SubtleCrypto)</span>
+          <span class="tech-pill">HTML5 LocalStorage API</span>
+          <span class="tech-pill">Async/Await & ArrayBuffers</span>
+          <span class="tech-pill">GitHub Pages Ready</span>
+        </div>
+
+        <div style="margin-top: 1.5rem; background: #F8FAFD; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.25rem;">
+          <h4 style="margin-bottom: 0.5rem; color: var(--primary);">Importance of Cryptography in Computer Science</h4>
+          <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+            Cryptography forms the mathematical bedrock of all modern digital civilization. Without robust symmetric encryption, asymmetric key exchange, collision-resistant hashing, and message authentication, secure e-commerce, cloud computing, private communication, blockchain networks, and sovereign digital identity could not exist. Studying both the vulnerabilities of historical ciphers and the mathematical elegance of modern authenticated primitives equips engineers to build resilient, trustworthy systems.
+          </p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/navigation.js"></script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+/* ==========================================================================
+   CryptoLab - Responsive Media Queries & Mobile Optimizations
+   ========================================================================== */
+
+/* Large Tablets & Small Laptops (Max 1100px) */
+@media (max-width: 1100px) {
+  .app-layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: static;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 1.5rem;
+    flex-direction: row;
+    align-items: center;
+    overflow-x: auto;
+    gap: 1.5rem;
+  }
+
+  .sidebar-section {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .sidebar-menu {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+
+  .sidebar-title {
+    display: none;
+  }
+
+  .workspace-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+}
+
+/* Medium Tablets & Mobile Devices (Max 768px) */
+@media (max-width: 768px) {
+  :root {
+    --header-height: 62px;
+  }
+
+  h1 { font-size: 1.75rem; }
+  h2 { font-size: 1.4rem; }
+  h3 { font-size: 1.15rem; }
+
+  .nav-menu {
+    display: none; /* Replaced by mobile drawer */
+  }
+
+  .nav-mobile-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Offcanvas Mobile Navigation Drawer */
+  .mobile-drawer-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(24, 59, 86, 0.4);
+    backdrop-filter: blur(4px);
+    z-index: 1999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-normal);
+  }
+
+  .mobile-drawer-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .mobile-drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 290px;
+    height: 100%;
+    background: var(--bg-card);
+    z-index: 2000;
+    transform: translateX(-100%);
+    transition: transform var(--transition-normal);
+    box-shadow: var(--shadow-xl);
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    overflow-y: auto;
+  }
+
+  .mobile-drawer.open {
+    transform: translateX(0);
+  }
+
+  .mobile-drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 1.25rem;
+  }
+
+  .mobile-drawer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .mobile-drawer-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-md);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    transition: all var(--transition-fast);
+  }
+
+  .mobile-drawer-link:hover,
+  .mobile-drawer-link.active {
+    background: var(--secondary-light);
+    color: var(--secondary);
+  }
+
+  /* Main content adjustments */
+  .main-content {
+    padding: 1.25rem 1rem;
+  }
+
+  .sidebar {
+    display: none; /* Mobile drawer handles all navigation */
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .algo-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .rsa-keys-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .avalanche-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .algo-hero-card {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .algo-workflow-steps {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .matrix-cell-input {
+    height: 38px;
+    font-size: 0.95rem;
+  }
+
+  .matrix-grid.grid-2x2 {
+    grid-template-columns: repeat(2, 50px);
+  }
+
+  .matrix-grid.grid-3x3 {
+    grid-template-columns: repeat(3, 42px);
+  }
+}
